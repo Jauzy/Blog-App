@@ -1,0 +1,21 @@
+{% extends "blog/base.html" %}
+<!-- Block of children -->
+{% block content %}
+
+{% for post in posts %}
+<article class="media content-section">
+    <img src="{{ post.author.profile.image.url }}" class="rounded-circle article-img" style="object-fit: cover;"/>
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{ post.author }}</a>
+            <!-- Date formating -->
+            <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+        </div>
+        <!-- passed post.id as url parameter -->
+        <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+        <p class="article-content">{{ post.content }}</p>
+    </div>
+</article>
+{% endfor %}
+
+{%  endblock content%}
